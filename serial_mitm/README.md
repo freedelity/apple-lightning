@@ -2,7 +2,7 @@ This program can be used to hijack the communication between an iDevice
 and a MFI accessory in order to communicate with an iOS app using
 any UART interface.
 
-This is intended to run on an Arduino but other AVR boards can be used.
+This is intended to run on an Arduino Mega but other AVR boards with 3 UART can be used.
 
  - **RX1** should be connected to **Data1** pin of the iDevice's lightning port.
  - **TX1** should be connected to **Data2** pin of the iDevice's lightning port.
@@ -11,13 +11,6 @@ This is intended to run on an Arduino but other AVR boards can be used.
 
 **The code is not written with the Arduino IDE. Here are instructions
 for compiling and uploading the code:**
-
- - For Arduino Uno:
-```
-avr-gcc -DF_CPU=16000000UL -mmcu=atmega328p -Os -o serial_mitm.o serial_mitm.c
-avr-objcopy -O ihex -R .eeprom serial_mitm.o serial_mitm.hex
-avrdude -V -F -c arduino -p m328p -b 115200 -P /dev/ttyACM0 -U flash:w:serial_mitm.hex
-```
 
  - For Arduino Mega:
 ```
