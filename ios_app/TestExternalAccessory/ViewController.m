@@ -18,6 +18,7 @@ NSString* PROTOCOL = @"Your accessory's protocol";
 @property (weak, nonatomic) IBOutlet UITextField *text;
 @property (weak, nonatomic) IBOutlet UIButton *btn;
 @property (weak, nonatomic) IBOutlet UITextView *response;
+@property (weak, nonatomic) IBOutlet UILabel *deviceStatus;
 @end
 
 @implementation ViewController
@@ -27,6 +28,7 @@ NSString* PROTOCOL = @"Your accessory's protocol";
     _accessory = nil;
     _session = nil;
     _response.text = @"Response\n";
+    _deviceStatus.font = [UIFont systemFontOfSize:20.0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,6 +83,9 @@ NSString* PROTOCOL = @"Your accessory's protocol";
     
     if( self.accessory != nil )
     {
+        self.deviceStatus.text = @"Device connected !";
+        self.deviceStatus.font = [UIFont boldSystemFontOfSize:20.0];
+        self.deviceStatus.textColor = [UIColor colorWithRed:0.1 green:0.8 blue:0.3 alpha:1.0];
         self.session = [[EASession alloc] initWithAccessory:self.accessory forProtocol:[self.accessory.protocolStrings objectAtIndex:0]];
         self.output = [self.session outputStream];
         [self.output setDelegate:self];
@@ -141,6 +146,9 @@ NSString* PROTOCOL = @"Your accessory's protocol";
         }
         self.accessory.delegate = nil;
         self.accessory = nil;
+        self.deviceStatus.font = [UIFont systemFontOfSize:20.0];
+        self.deviceStatus.textColor = [UIColor blackColor];
+        self.deviceStatus.text = @"No device connected";
     }
 }
 
